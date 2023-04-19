@@ -51,8 +51,8 @@ function Navbar() {
     const user = JSON.parse(localStorage.getItem('user'));
     const cart = JSON.parse(localStorage.getItem('cart'));
     setUser(user);
-    setTotalItems(cart.reduce((total, item) => (total += item.quantity), 0));
-  }, []);
+    setTotalItems(cart?.reduce((total, item) => (total += item.quantity), 0));
+  }, [user?.name]);
 
   const handleSearchItem = async (e) => {
     e.preventDefault();
@@ -77,15 +77,17 @@ function Navbar() {
 
   const logged = () => (
     <div className='flex items-center gap-3'>
-      <button
-        className='flex items-center gap-2 bg-emerald-500 px-3 py-2 text-xl text-white'
-        onClick={() => setIsOpenModal(true)}
-      >
-        <BsCart2 />
-        <span className='bg-yellow-400 text-black px-2 text-base'>
-          {totalItems}
-        </span>
-      </button>
+      {user !== 'admin' && (
+        <button
+          className='flex items-center gap-2 bg-emerald-500 px-3 py-2 text-xl text-white'
+          onClick={() => setIsOpenModal(true)}
+        >
+          <BsCart2 />
+          <span className='bg-yellow-400 text-black px-2 text-base'>
+            {totalItems}
+          </span>
+        </button>
+      )}
       <button
         className='border border-emerald-500 text-emerald-500 rounded-full aspect-square p-2 text-lg relative'
         onClick={() => setOpenSettings(!openSettings)}

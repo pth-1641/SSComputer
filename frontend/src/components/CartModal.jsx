@@ -24,14 +24,15 @@ function CartModal({ isOpenModal, setIsOpenModal }) {
     (total, item) => (total += item.price * item.quantity),
     0
   );
+
   const totalItems = cart?.reduce((total, item) => (total += item.quantity), 0);
   const options = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
   useEffect(() => {
-    const cart = localStorage.getItem('cart');
-    setCart(JSON.parse(cart));
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    setCart(cart);
   }, [isOpenModal]);
 
   useEffect(() => {

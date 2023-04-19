@@ -20,13 +20,20 @@ function SignIn() {
     },
     onSubmit: async (values) => {
       try {
-        // if (
-        //   email === process.env.ADMIN_EMAIL &&
-        //   password === process.env.ADMIN_PASSWORD
-        // ) {
-        //   alert('Admin');
-        //   return;
-        // }
+        const { email, password } = values;
+        if (
+          email === import.meta.env.VITE_ADMIN_EMAIL &&
+          password === import.meta.env.VITE_ADMIN_PASSWORD
+        ) {
+          const { data } = await axios.post('admin', { email, password });
+          localStorage.setItem('access-token', data.token);
+          localStorage.setItem('user', JSON.stringify('admin'));
+          localStorage.setItem('cart', JSON.stringify([]));
+          setUser('admin');
+          toast.success('Đăng nhập thành công');
+          navigate('/admin');
+          return;
+        }
         const { data } = await axios.post('users', values);
         if (data.status !== 200) {
           toast.error(data.message);

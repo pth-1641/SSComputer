@@ -35,7 +35,7 @@ const getItems = async (req, res, next) => {
     const query = req.query.q;
     const result = collections.map(async (collection) => {
       const data = await collection.find({
-        title: { $regex: query, $options: '-i' },
+        title: { $regex: query, $options: 'i' },
       });
       const type = collection.modelName.toLowerCase();
       console.log([

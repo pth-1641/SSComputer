@@ -21,6 +21,7 @@ function CaseDetails() {
     (async () => {
       const { data } = await axios.get(`/cases/${id}`);
       setComputerCase(data);
+      console.log(data);
     })();
   }, []);
 

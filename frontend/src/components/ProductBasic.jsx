@@ -87,7 +87,7 @@ function ProductBasic({ item, currentTab, setCurrentTab, inventory }) {
             }}
           >
             {item.details.gallery?.map((src) => (
-              <SwiperSlide key={src}>
+              <SwiperSlide key={src} className='flex items-center'>
                 <img src={src} alt={item?.title} className='w-full' />
               </SwiperSlide>
             ))}
@@ -96,7 +96,7 @@ function ProductBasic({ item, currentTab, setCurrentTab, inventory }) {
           <img
             src={item.thumbnail}
             alt={item?.title}
-            className='object-contain flex-1'
+            className='object-contain flex-1 max-w-xl'
           />
         )}
         <div className='flex-1'>
@@ -173,7 +173,10 @@ function ProductBasic({ item, currentTab, setCurrentTab, inventory }) {
               </span>
               Thêm vào giỏ
             </button>
-            <button className='flex justify-center gap-2 items-center bg-emerald-500 text-white uppercase font-bold px-5 py-3 flex-1'>
+            <button
+              className='flex justify-center gap-2 items-center bg-emerald-500 text-white uppercase font-bold px-5 py-3 flex-1'
+              onClick={() => navigate('/order')}
+            >
               <span className='text-2xl'>
                 <HiPlusSm />
               </span>

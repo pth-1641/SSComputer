@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 function Products({ title, items, totalItems, totalPages }) {
-  const { search, pathname } = useLocation();
+  const { search, pathname, key } = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 

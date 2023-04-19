@@ -1,4 +1,5 @@
 const Case = require('../models/Case.model');
+const JWT = require('jsonwebtoken');
 
 const getAllCases = async (req, res, next) => {
   try {
@@ -33,7 +34,51 @@ const getCase = async (req, res, next) => {
   }
 };
 
+const createCase = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const { role } = isValidToken;
+    if (role !== 'admin') {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    await Case.create(req.body);
+    res.json({ status: 200, message: 'Success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteCase = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const { role } = isValidToken;
+    if (role !== 'admin') {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    await Case.findByIdAndDelete(req.body.id);
+    res.json({ status: 200, message: 'Success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllCases,
   getCase,
+  createCase,
+  deleteCase,
 };

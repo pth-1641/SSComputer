@@ -68,7 +68,7 @@ const accessories = [
     title: 'PC Gaming',
     subTitle: 'Chiến mọi game',
     color: '#3b82f6',
-    link: '/pc',
+    link: '/computer',
   },
   {
     thumbnail: keyboardAccesory,
@@ -223,7 +223,7 @@ function Home() {
       <ProductsSlider
         title='Sản phẩm nổi bật'
         items={computers?.items}
-        link='/pc'
+        link='/computer'
       />
       <ProductsSlider title='Chuột gaming' items={mice?.items} link='/mouse' />
       <HeaderTitle title='Giới thiệu về TNC Studio' />

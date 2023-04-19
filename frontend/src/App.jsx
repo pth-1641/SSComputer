@@ -39,6 +39,9 @@ import Search from './pages/search';
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import User from './pages/user';
+import Admin from './pages/admin';
+import EditItem from './pages/admin/edit';
+import CreateItem from './pages/admin/create';
 
 export function App() {
   const { toasts } = useToasterStore();
@@ -95,6 +98,9 @@ export function App() {
         <Route path='/cooler/:id' element={<CoolerDetails />} />
         <Route path='/search' element={<Search />} />
         <Route path='/order' element={<Order />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/edit' element={<EditItem />} />
+        <Route path='/admin/create' element={<CreateItem />} />
       </Routes>
       <Footer />
     </>

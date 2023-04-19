@@ -13,11 +13,13 @@ function ProductDetails({ details, title }) {
         Đánh giá chi tiết {title}
       </h2>
       <h3 className='font-medium my-2'>{details.shortDescription.title}</h3>
-      <img
-        className='mx-auto'
-        src={details.shortDescription.thumbnail}
-        alt={title}
-      />
+      {details.shortDescription.thumbnail && (
+        <img
+          className='mx-auto'
+          src={details.shortDescription.thumbnail}
+          alt={title}
+        />
+      )}
       {details.features.map((feat, idx) => (
         <div key={idx} className='mb-3 mt-1'>
           <h4 className='font-semibold text-lg'>{feat.title}</h4>

@@ -25,7 +25,6 @@ const nodeMailerToken = ({ name, redirectUrl }) => {
 const accessToken = ({ name, role, email }) => {
   return new Promise((resolve, reject) => {
     const payload = {
-      name,
       role,
       email,
     };
