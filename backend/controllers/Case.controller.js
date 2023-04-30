@@ -1,4 +1,5 @@
 const Case = require('../models/Case.model');
+const createError = require('http-errors');
 const JWT = require('jsonwebtoken');
 
 const getAllCases = async (req, res, next) => {

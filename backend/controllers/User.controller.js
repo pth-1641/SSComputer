@@ -110,6 +110,16 @@ const updateUserProfile = async (req, res, next) => {
   }
 };
 
+const updateUserStatus = async (req, res, next) => {
+  try {
+    const { status, email } = req.body;
+    await User.findOneAndUpdate({ email }, { status });
+    res.status(200).json({ status: 200, message: 'Success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const updateUserPassword = async (req, res, next) => {
   try {
     const { email, password, newPassword } = req.body;
@@ -248,6 +258,23 @@ const updateUserCart = async (req, res, next) => {
   }
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const itemPerPage = 15;
+    const page = parseInt(req.query.page) || 1;
+    const totalItems = await User.countDocuments();
+    const startIdx = (page - 1) * itemPerPage;
+    const users = await User.find().skip(startIdx).limit(itemPerPage);
+    res.status(200).json({
+      totalItems,
+      items: users,
+      totalPages: Math.ceil(totalItems / itemPerPage),
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createUser,
   resetUserPassword,
@@ -255,4 +282,6 @@ module.exports = {
   updateUserProfile,
   updateUserPassword,
   updateUserCart,
+  getAllUsers,
+  updateUserStatus,
 };

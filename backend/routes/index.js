@@ -20,5 +20,6 @@ router.use('/coolers', require('./coolers'));
 router.use('/search', require('./search'));
 router.use('/order', require('./order'));
 router.use('/admin', require('./admin'));
+router.use('/comments', require('./comment'));
 
 module.exports = router;

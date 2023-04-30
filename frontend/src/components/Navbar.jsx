@@ -103,16 +103,26 @@ function Navbar() {
               : 'pointer-events-none opacity-0'
           }`}
         >
-          <Link to='/user'>
-            <li className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'>
-              Cài đặt
-            </li>
-          </Link>
-          <Link to='/order'>
-            <li className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'>
-              Đơn mua
-            </li>
-          </Link>
+          {user !== 'admin' ? (
+            <>
+              <Link to='/user'>
+                <li className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'>
+                  Cài đặt
+                </li>
+              </Link>
+              <Link to='/order'>
+                <li className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'>
+                  Đơn mua
+                </li>
+              </Link>
+            </>
+          ) : (
+            <Link to='/admin?tab=orders'>
+              <li className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'>
+                Trang quản lý
+              </li>
+            </Link>
+          )}
           <li
             className='min-w-max px-3 py-1 hover:bg-emerald-500 hover:text-white duration-100'
             onClick={handleSignOut}

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'preact/hooks';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import CategoryTable from '../../components/Admin/CategoryTable';
+import UserTable from '../../components/Admin/UserTable';
+import OrderTable from '../../components/Admin/OrderTable';
 
 const sidebarItems = [
-  { label: 'Doanh thu', path: 'incomes' },
+  // { label: 'Doanh thu', path: 'incomes' },
   { label: 'Đơn hàng', path: 'orders' },
   { label: 'Người dùng', path: 'users' },
   { label: 'Laptop', path: 'laptops' },
@@ -55,7 +57,13 @@ function Admin() {
         ))}
       </ul>
       <div className='col-span-8'>
-        <CategoryTable category={currentTab} />
+        {currentTab === 'users' ? (
+          <UserTable />
+        ) : currentTab === 'orders' ? (
+          <OrderTable />
+        ) : (
+          <CategoryTable category={currentTab} />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 const Mouse = require('../models/Mouse.model');
+const createError = require('http-errors');
+const JWT = require('jsonwebtoken');
 
 const getAllMice = async (req, res, next) => {
   try {
@@ -33,7 +35,51 @@ const getMouse = async (req, res, next) => {
   }
 };
 
+const createMouse = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const { role } = isValidToken;
+    if (role !== 'admin') {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    await Mouse.create(req.body);
+    res.json({ status: 200, message: 'Success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteMouse = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    const { role } = isValidToken;
+    if (role !== 'admin') {
+      throw createError.Unauthorized('Admin chưa đăng nhập');
+    }
+    await Mouse.findByIdAndDelete(req.body.id);
+    res.json({ status: 200, message: 'Success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllMice,
   getMouse,
+  createMouse,
+  deleteMouse,
 };

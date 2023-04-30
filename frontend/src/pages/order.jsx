@@ -2,6 +2,8 @@ import { useState } from 'preact/hooks';
 import CanceledOrder from '../components/CanceledOrder';
 import Cart from '../components/Cart';
 import PendingOrder from '../components/PendingOrder';
+import FinishedOrder from '../components/FinishedOrder';
+import GoingOrder from '../components/OnGoing';
 
 function Order() {
   const [currentTab, setCurrentTab] = useState('cart');
@@ -52,6 +54,8 @@ function Order() {
       </ul>
       {currentTab === 'cart' && <Cart />}
       {currentTab === 'pending' && <PendingOrder />}
+      {currentTab === 'on-going' && <GoingOrder />}
+      {currentTab === 'finished' && <FinishedOrder />}
       {currentTab === 'canceled' && <CanceledOrder />}
     </div>
   );

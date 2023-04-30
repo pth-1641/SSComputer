@@ -1,5 +1,6 @@
 const Order = require('../models/Order.model');
 const User = require('../models/User.model');
+const createError = require('http-errors');
 const JWT = require('jsonwebtoken');
 
 const createNewOrder = async (req, res, next) => {
@@ -37,6 +38,57 @@ const getPendingOrderByUser = async (req, res, next) => {
     }
     const { email } = isValidToken;
     const orders = await Order.find({ email, status: 1 });
+    res.status(200).json({ orders, status: 200 });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getPendingOrderByAdmin = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const orders = await Order.find({ status: 1 });
+    res.status(200).json({ orders, status: 200 });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getOnGoingOrderByAdmin = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const orders = await Order.find({ status: 2 });
+    res.status(200).json({ orders, status: 200 });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getFinishedOrderByAdmin = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const isValidToken = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+    if (!isValidToken) {
+      throw createError.Unauthorized('Người dùng chưa đăng nhập');
+    }
+    const orders = await Order.find({ status: 3 });
     res.status(200).json({ orders, status: 200 });
   } catch (err) {
     next(err);
@@ -87,4 +139,7 @@ module.exports = {
   getPendingOrderByUser,
   updateOrderStatus,
   getCanceledOrderByUser,
+  getPendingOrderByAdmin,
+  getOnGoingOrderByAdmin,
+  getFinishedOrderByAdmin,
 };
