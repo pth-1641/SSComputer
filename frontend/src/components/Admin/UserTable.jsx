@@ -71,6 +71,7 @@ function UserTable() {
           <th className='py-2'>SĐT</th>
           <th className='py-2'>Email</th>
           <th className='py-2 w-max'>Địa chỉ</th>
+          <th className='py-2'>Trạng thái</th>
           <th className='py-2'>Tùy chọn</th>
         </tr>
         {users?.map((user) => (
@@ -79,6 +80,9 @@ function UserTable() {
             <td className='font-medium text-center'>{user.phoneNumber}</td>
             <td className='text-center'>{user.email}</td>
             <td className='text-center'>{user.address}</td>
+            <td className='text-center'>
+              {user.status === 0 ? 'Khoá' : 'Mở khoá'}
+            </td>
             <td className='px-3 py-1'>
               <div className='flex justify-center items-center gap-5'>
                 {user.status === 0 ? (
