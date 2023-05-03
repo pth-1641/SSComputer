@@ -116,12 +116,6 @@ function UserTable() {
           <GrFormNext />
         </button>
       </div>
-      <button
-        className='bg-emerald-500 text-white font-medium mx-auto block mb-10 px-4 py-2'
-        onClick={() => navigate(`/admin/create?category=${category}`)}
-      >
-        Thêm sản phẩm
-      </button>
 
       {/* Modal */}
       <div
