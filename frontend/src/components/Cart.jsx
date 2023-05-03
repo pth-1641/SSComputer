@@ -143,6 +143,10 @@ function Cart() {
   }, [user]);
 
   const handleNewOrder = async () => {
+    if (cart.length === 0) {
+      toast.error('Không thể đặt đơn hàng rỗng');
+      return;
+    }
     const { email, address, name, phoneNumber } = user;
     const token = localStorage.getItem('access-token');
     const { data } = await axios.post(
