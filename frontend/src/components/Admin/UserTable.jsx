@@ -76,16 +76,16 @@ function UserTable() {
         </tr>
         {users?.map((user) => (
           <tr key={user._id}>
-            <td className='px-3 py-1 text-center'>{user.name}</td>
-            <td className='font-medium text-center'>{user.phoneNumber}</td>
-            <td className='text-center'>{user.email}</td>
-            <td className='text-center'>{user.address}</td>
+            <td className='px-3 py-1 text-center'>{user?.name}</td>
+            <td className='font-medium text-center'>{user?.phoneNumber}</td>
+            <td className='text-center'>{user?.email}</td>
+            <td className='text-center'>{user?.address}</td>
             <td className='text-center'>
-              {user.status === 0 ? 'Khoá' : 'Mở khoá'}
+              {user?.status === 0 ? 'Khoá' : 'Mở khoá'}
             </td>
             <td className='px-3 py-1'>
               <div className='flex justify-center items-center gap-5'>
-                {user.status === 0 ? (
+                {user?.status === 0 ? (
                   <button
                     className='text-blue-600 flex items-center gap-2'
                     onClick={() => handleUnlockUser(user)}

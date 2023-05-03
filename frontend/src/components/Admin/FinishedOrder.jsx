@@ -29,10 +29,10 @@ function FinishedOrder() {
             </h3>
             <hr className='my-2 border-gray-100' />
             <div className='px-4 flex items-center gap-4'>
-              <p>Tên: {customer.name}</p>
-              <p>SĐT: {customer.phoneNumber}</p>
+              <p>Tên: {customer?.name}</p>
+              <p>SĐT: {customer?.phoneNumber}</p>
               <p>Email: {email}</p>
-              <p>Địa chỉ: {customer.address}</p>
+              <p>Địa chỉ: {customer?.address}</p>
             </div>
             <hr className='my-2 border-gray-100' />
             {items.map((item) => (
