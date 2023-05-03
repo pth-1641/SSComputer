@@ -172,6 +172,7 @@ function Cart() {
     toast.success('Đặt hàng thành công');
     localStorage.setItem('cart', '[]');
     setCart([]);
+    setTotalItems(0);
   };
 
   return (
